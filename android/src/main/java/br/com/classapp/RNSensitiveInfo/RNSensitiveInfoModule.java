@@ -309,7 +309,7 @@ public class RNSensitiveInfoModule extends ReactContextBaseJavaModule {
         try {
             if (!mKeyStore.containsAlias(KEY_ALIAS)) {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, ANDROID_KEYSTORE_PROVIDER);
+                    KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, ANDROID_KEYSTORE_PROVIDER);
                     keyGenerator.init(
                             new KeyGenParameterSpec.Builder(KEY_ALIAS,
                                     KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT)
@@ -590,8 +590,8 @@ public class RNSensitiveInfoModule extends ReactContextBaseJavaModule {
     
     public String encrypt(String input) throws Exception {
         byte[] bytes = input.getBytes();
-
         Cipher c;
+        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Key secretKey = ((KeyStore.SecretKeyEntry) mKeyStore.getEntry(KEY_ALIAS, null)).getSecretKey();
             c = Cipher.getInstance(AES_GCM);
