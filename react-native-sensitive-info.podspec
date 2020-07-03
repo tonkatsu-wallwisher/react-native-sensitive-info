@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
   s.source        = { :git => 'https://github.com/mCodex/react-native-sensitive-info.git' }
 
   s.dependency "React"
+  s.dependency "PadletSensitiveInfo"
 end
